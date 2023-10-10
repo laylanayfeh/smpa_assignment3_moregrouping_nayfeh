@@ -1,6 +1,6 @@
 ---
 title: "R Assignment #3"
-author: "Put Your Name Here"
+author: "Layla Nayfeh"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
@@ -44,10 +44,16 @@ Write your code using grouping in the chunks below to help answer the following 
 
 ```{r}
 
+for_impeachment_count <- impeach %>%
+  filter(for_impeachment == "YES") %>%
+  nrow()
 
+against_impeachment_count <- impeach %>%
+  filter(for_impeachment == "NO") %>%
+  nrow()
 
-
-
+for_impeachment_count
+against_impeachment_count
 
 ```
 
@@ -58,7 +64,11 @@ You'll want to ensure you do the grouping on both columns together, e.g. `group_
 ```{r}
 
 
+grouped_counts <- impeach %>%
+  group_by(for_impeachment, gdp_above_national) %>%
+  summarize(count = n())
 
+print(grouped_counts)
 
 
 
