@@ -144,12 +144,13 @@ won_by_5_or_more_points
 
 ```{r}
 
-  
+# looking at avg nonwhite percentage vs for and against impeachment
 
+nonwhiteness <- impeach %>%
+  group_by(for_impeachment) %>%
+  summarize(mean_nonwhite = mean(pct_nonwhite))
 
-
-
-
+nonwhiteness
 
 
 ```
@@ -160,11 +161,13 @@ Use the mutate() function to create two new columns: one that extracts the year 
 
 ```{r}
 
-  
+  impeach2 <- impeach %>%
+  mutate(
+    year_announced = format(as.Date(date_announced), "%Y"),
+    month_announced = format(as.Date(date_announced), "%m")
+  )
 
-
-
-
+impeach2
 
 
 
@@ -174,12 +177,12 @@ Use the mutate() function to create two new columns: one that extracts the year 
 
 ```{r}
 
-  
+  announcement_counts <- impeach2 %>%
+  filter(for_impeachment == "YES") %>%
+  group_by(year_announced, month_announced) %>%
+  summarize(count = n())
 
-
-
-
-
+announcement_counts
 
 
 ```
