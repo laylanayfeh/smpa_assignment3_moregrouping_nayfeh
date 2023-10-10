@@ -68,12 +68,7 @@ grouped_counts <- impeach %>%
   group_by(for_impeachment, gdp_above_national) %>%
   summarize(count = n())
 
-print(grouped_counts)
-
-
-
-
-
+grouped_counts
 
 
 ```
@@ -83,12 +78,11 @@ print(grouped_counts)
 ```{r}
 
 
+grouped_counts2 <- impeach %>%
+  group_by(for_impeachment, pct_bachelors_compared_to_national) %>%
+  summarize(count = n())
 
-
-
-
-
-
+grouped_counts2 
 
 
 ```
