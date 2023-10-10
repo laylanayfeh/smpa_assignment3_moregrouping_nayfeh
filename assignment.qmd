@@ -95,12 +95,12 @@ In other words, you want to end up with the calculated mean for what that percen
 
 ```{r}
 
+mean_college_graduates <- impeach %>%
+  group_by(for_impeachment) %>%
+  summarize(mean_pct_bachelors = mean(pct_bachelors))
 
 
-
-
-
-
+mean_college_graduates
 
 
 ```
@@ -111,12 +111,11 @@ The relevant column for that is `trump_percent`.
 ```{r}
 
 
+mean_trump_vote_percent <- impeach %>%
+  group_by(for_impeachment) %>%
+  summarize(mean_trump_percent = mean(trump_percent))
 
-
-
-
-
-
+mean_trump_vote_percent
 
 
 ```
@@ -125,13 +124,19 @@ The relevant column for that is `trump_percent`.
 
 ```{r}
 
-  
+yes_impeachment_members <- impeach %>%
+  filter(for_impeachment == "YES")
 
+won_by_less_than_5_points <- yes_impeachment_members %>%
+  filter(margin_flag_2018 == "5_points_or_less") %>%
+  nrow()
 
+won_by_5_or_more_points <- yes_impeachment_members %>%
+  filter(margin_flag_2018 == "more_than_5_points") %>%
+  nrow()
 
-
-
-
+won_by_less_than_5_points
+won_by_5_or_more_points
 
 ```
 
